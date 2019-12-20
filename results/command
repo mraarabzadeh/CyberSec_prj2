@@ -1,0 +1,39 @@
+  716  openssl des-cbc -d -in m_1.enc -kfile k_1.bin -out -A step1.txt
+  717  openssl des-cfb -d -in m_1.enc -kfile k_1.bin -out -A step1.txt
+  718  openssl des-cfb -d -in m_1.enc -kfile k_1.bin -out step1.txt
+  719  openssl rsa -in koscer.cer -pubout > key.pub
+  720  x509 -pubkey -noout -in koscer.cer > pub.cert
+  721  openssl x509 -pubkey -noout -in koscer.cer > pub.cert
+  722  cat pub.cert 
+  723  openssl rsa -in certificate.pem -out publickey.pem -outform PEM -pubout
+  724* openssl rsa -in koscer.cer -out publickey.pem -outform PEM -pubout
+  725  openssl rsautl -encrypt -pubin -inkey pub.cert >message.encrypted
+  726  openssl rsautl -encrypt -pubin -in step1.txt -inkey pub.cert >message.encrypted
+  727  openssl rsa -encrypt -pubin -in step1.txt -inkey pub.cert >message.encrypted
+  728  openssl rsautl -encrypt -pubin -in step1.txt -inkey pub.cert 
+  729  cat step1.txt > openssl rsautl -encrypt -pubin  -inkey pub.cert 
+  730  cat step1.txt | openssl rsautl -encrypt -pubin  -inkey pub.cert 
+  731  echo 123456| openssl rsautl -encrypt -pubin  -inkey pub.cert 
+  732  cat 128_bit| openssl rsautl -encrypt -pubin  -inkey pub.cert 
+  733  cat 128_bit| openssl rsautl -encrypt -pubin  -inkey pub.cert > k2.bin.enc
+  734  openssl des-ecb -e -in step1.txt -kfile k2.bin.enc -out m2.enc
+  735  cat m2.enc 
+  736  clear
+  737  ls
+  738  openssl dgst -sha256 m2.enc > hash
+  739  openssl x509 -prikey -noout -in koscer.cer > private.cert
+  740  ls
+  741  openssl rsautl -sign -inkey PKCS12_Credential_mraarabzadeh@outlook.com.pfx -keyform PEM -in hash >signature
+  742  openssl x509 -prikey -noout -in PKCS12_Credential_mraarabzadeh@outlook.com.pfx > private.cert
+  743  man x509
+  745  openssl pkcs12 -in PKCS12_Credential_mmd.ghanbari@outlook.com.pfx -nocerts -nodes -out bob-keypair.key
+  746  openssl pkcs12 -in PKCS12_Credential_mraarabzadeh@outlook.com.pfx -nocerts -nodes -out bob-keypair.key
+  747  openssl rsa -in bob-keypair.key -pubout -out bob_pub.pem
+  748  openssl rsa -in bob-keypair.key -out bob-private-temp.key
+  749  openssl pkcs8 -topk8 -inform PEM -in bob-private-temp.key -outform PEM -nocrypt > bob-private.pem
+  750  openssl dgst -sha256 -sign bob-private.pem -out sha256.sign myfile.txt
+  751  openssl dgst -sha256 -sign bob-private.pem -out sha256.sign m2.enc 
+  752  ls
+  753  ls -ltrh
+  754  cat sha256.sign 
+  755  history > history
